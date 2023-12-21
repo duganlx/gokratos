@@ -1,29 +1,28 @@
-# p, SRCGROUP:prod, EAM011:v1:ip:prod, *
-# p, SRCGROUP:prod, EAM011:v1:ip:prod, *
-# p, SRCGROUP:prod, EAM012:v1:ip:prod, *
-# p, SRCGROUP:EAM, EAM001:v1:ip:test, *
-# p, SRCGROUP:EAM, EAM002:v1:ip:test, *
-# p, SRCGROUP:EAM, EAM003:v1:ip:test, *
-# p, SRCGROUP:EAM, EAM011:v1:ip:prod, *
-# p, SRCGROUP:EAM, EAM012:v1:ip:prod, *
-# p, SRCGROUP:DRW, DRW001:v1:ip:test, *
-# p, SRCGROUP:DRW, DRW001:v1:ip:prod, *
-# p, USERGROUP:admin, *, *
-# p, USERGROUP:test, EAM011:v1:ip:prod, *
-# p, USER:1559730848930992128, DRW001:v1:ip:prod, *
-# p, USER:1523580757186973696, EAM101:v1:ip:test, *
-# p, USER:1407998757118676992, EAM101:v1:ip:test, *
-# p, USER:1407998757118676992, DRW001:v1:ip:prod, *
-# p, USER:1407998757118676992, EAM002:v1:ip:test, *
-# 
-# g, USERGROUP:quant, SRCGROUP:EAM
-# g, USERGROUP:quant, SRCGROUP:DRW
-# g, USERGROUP:test, SRCGROUP:test
-# g, USER:1416962189826199552, USERGROUP:admin
-# g, USER:1506439972247310336, USERGROUP:admin
-# g, USER:1416962189826199552, USERGROUP:quant
-# g, USER:1523580757186973696, USERGROUP:quant
-# g, USER:1559730848930992128, USERGROUP:test
-# g, USER:1523580757186973696, USERGROUP:test
-# g, USER:1506439972247310336, USERGROUP:test
-# g, USER:1523580757186973696, SRCGROUP:EAM
+p, USER:lvx, DRW001:v1:test, *, allow
+p, USER:lvx, DRW002:v1:test, r, allow
+p, USER:lvx, DRW003:v1:test, w, allow
+p, USER:lvx, DRW004:v1:test, *, allow
+p, USER:lvx, DRW004:v1:test, w, deny
+
+g, USER:lvx, USERGROUP:it
+g, USER:lvx, SRCGROUP:drw
+g, USER:lvx, USERGROUP:eam
+g, USERGROUP:eam, SRCGROUP:eam
+
+p, USERGROUP:it, DRW011:v1:test, *, allow
+p, USERGROUP:it, DRW012:v1:test, r, allow
+p, USERGROUP:it, DRW013:v1:test, w, allow
+p, USERGROUP:it, DRW014:v1:test, *, allow
+p, USERGROUP:it, DRW014:v1:test, w, deny
+
+p, SRCGROUP:drw, DRW101:v1:test, *, allow
+p, SRCGROUP:drw, DRW102:v1:test, r, allow
+p, SRCGROUP:drw, DRW103:v1:test, w, allow
+p, SRCGROUP:drw, DRW104:v1:test, *, allow
+p, SRCGROUP:drw, DRW104:v1:test, w, deny
+
+p, SRCGROUP:eam, EAM101:v1:test, *, allow
+p, SRCGROUP:eam, EAM102:v1:test, r, allow
+p, SRCGROUP:eam, EAM103:v1:test, w, allow
+p, SRCGROUP:eam, EAM104:v1:test, *, allow
+p, SRCGROUP:eam, EAM104:v1:test, w, deny
