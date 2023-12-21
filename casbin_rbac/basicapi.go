@@ -1,30 +1,31 @@
-package main
+package casbin_rbac
 
 import (
 	"fmt"
-	"testing"
 
 	"github.com/casbin/casbin/v2"
-	"github.com/stretchr/testify/assert"
 )
 
-func NewEnforcer() *casbin.Enforcer {
+func NewEnforcer(policies [][]string) *casbin.Enforcer {
 
 	e, err := casbin.NewEnforcer("./model.conf", "./policy.csv")
 	if err != nil {
 		panic(err)
 	}
 
+	// Load Policy Configuration
+	for _, policy := range policies {
+		tye := policy[0]
+
+		switch tye {
+		case "p":
+			e.AddPolicy(policy[1:])
+		case "g":
+			e.AddGroupingPolicy(policy[1:])
+		default:
+		}
+	}
 	return e
-}
-
-func TestEnforce(t *testing.T) {
-	e := NewEnforcer()
-
-	ok, err := e.Enforce("USER:1416962189826199552", "EAM011:v1:ip:prod", "*")
-	assert.Nil(t, err)
-	assert.True(t, ok)
-
 }
 
 func EnforceWithMatcher(e *casbin.Enforcer) {
@@ -43,13 +44,3 @@ func EnforceWithMatcher(e *casbin.Enforcer) {
 
 	fmt.Println(ok)
 }
-
-// func main() {
-// 	e, err := casbin.NewEnforcer("./model.conf", "./policy.csv")
-// 	if err != nil {
-// 		panic(err)
-// 	}
-
-// 	Enforce(e)
-// 	EnforceWithMatcher(e)
-// }
