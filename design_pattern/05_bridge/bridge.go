@@ -3,11 +3,11 @@ package bridge
 import "fmt"
 
 type AbstractMessage interface {
-	SendMessage(text, to string)
+	SendMessage(text, to string) string
 }
 
 type MessageImplementer interface {
-	Send(text, to string)
+	Send(text, to string) string
 }
 
 // ===================================================================
@@ -17,8 +17,8 @@ func ViaSMS() MessageImplementer {
 	return &MessageSMS{}
 }
 
-func (*MessageSMS) Send(text, to string) {
-	fmt.Printf("send %s to %s via SMS", text, to)
+func (*MessageSMS) Send(text, to string) string {
+	return fmt.Sprintf("send %s to %s via SMS", text, to)
 }
 
 type MessageEmail struct{}
@@ -27,8 +27,8 @@ func ViaEmail() MessageImplementer {
 	return &MessageEmail{}
 }
 
-func (*MessageEmail) Send(text, to string) {
-	fmt.Printf("send %s to %s via Email", text, to)
+func (*MessageEmail) Send(text, to string) string {
+	return fmt.Sprintf("send %s to %s via Email", text, to)
 }
 
 // ===================================================================
@@ -42,8 +42,8 @@ func NewCommonMessage(method MessageImplementer) *CommonMessage {
 	}
 }
 
-func (m *CommonMessage) SendMessage(text, to string) {
-	m.method.Send(text, to)
+func (m *CommonMessage) SendMessage(text, to string) string {
+	return m.method.Send(text, to)
 }
 
 type UrgencyMessage struct {
@@ -56,6 +56,6 @@ func NewUrgencyMessage(method MessageImplementer) *UrgencyMessage {
 	}
 }
 
-func (m *UrgencyMessage) SendMessage(text, to string) {
-	m.method.Send(fmt.Sprintf("[Urgency] %s", text), to)
+func (m *UrgencyMessage) SendMessage(text, to string) string {
+	return m.method.Send(fmt.Sprintf("[Urgency] %s", text), to)
 }
