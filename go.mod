@@ -7,6 +7,7 @@ require xorm.io/xorm v1.3.4
 require (
 	github.com/Knetic/govaluate v3.0.1-0.20171022003610-9aa49832a739+incompatible // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
+	github.com/lib/pq v1.10.7 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
@@ -15,6 +16,7 @@ require (
 	github.com/casbin/casbin v1.9.1
 	github.com/casbin/casbin/v2 v2.80.0 // indirect
 	github.com/casbin/govaluate v1.1.0 // indirect
+	github.com/casbin/xorm-adapter/v2 v2.5.1
 	github.com/go-sql-driver/mysql v1.7.1
 	github.com/goccy/go-json v0.8.1 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
