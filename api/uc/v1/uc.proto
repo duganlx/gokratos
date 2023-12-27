@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package uc.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "gokratos/api/uc/v1;v1";
+
+service UserCenter {
+  rpc Login(LoginRequest) returns (LoginReply) {
+    option (google.api.http) = {
+      post: "/api/uc/v1/login"
+      body: "*"
+    };
+  }
+
+  rpc Authraw(AuthrawRequest) returns (AuthrawReply) {
+    option (google.api.http) = {
+      post: "/api/uc/v1/auth"
+      body: "*"
+    };
+  }
+}
+
+message LoginRequest {
+  string accessType = 1;
+  string appId = 2;
+  string appSecret = 3;
+  string auCode = 4;
+}
+message LoginReply {
+  string accessToken = 1;
+  string refreshToken = 2;
+  string tokenType = 3;
+  int64 expires = 4;
+  string scrope = 5;
+  int64 uid = 6;
+}
+
+message AuthrawRequest {
+  string auCode = 1;
+  string opType = 2;
+  int64 uid = 3;
+}
+message AuthrawReply {
+  bool ok = 1;
+}

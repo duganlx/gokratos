@@ -1,14 +1,20 @@
 package decorator
 
-import "fmt"
+import (
+	"testing"
 
-func ExampleDecorator() {
+	"github.com/stretchr/testify/assert"
+)
+
+func TestExampleDecorator(t *testing.T) {
 	var c Component = &ConcreteComponent{}
-	c = WrapAddDecorator(c, 10)
-	c = WrapMulDecorator(c, 8)
-	res := c.Calc()
+	var res int
 
-	fmt.Printf("res %d\n", res)
-	// Output:
-	// res 80
+	c = WrapAddDecorator(c, 10)
+	res = c.Calc()
+	assert.Equal(t, res, 10)
+
+	c = WrapMulDecorator(c, 8)
+	res = c.Calc()
+	assert.Equal(t, res, 80)
 }

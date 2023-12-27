@@ -322,9 +322,22 @@ func TestGetFTs(t *testing.T) {
 	// }
 }
 
-// func TestGetInfos(t *testing.T) {
-// 	// todo has error
-// 	endpoint := "192.168.1.188:30035"
+func TestGetInfos(t *testing.T) {
+	// todo has error
+	endpoint := "192.168.1.188:30015"
+	client := NewFlightClient(endpoint)
+	err := client.Connect()
+	assert.Nil(t, err)
+	defer client.Disconnect()
+
+	r, err := client.DoAction("get_infos")
+	assert.Nil(t, err)
+
+	fmt.Println(string(r))
+}
+
+// func TestGetAuMetrics(t *testing.T) {
+// 	endpoint := "192.168.1.188:30005"
 // 	client := NewFlightClient(endpoint)
 // 	err := client.Connect()
 // 	assert.Nil(t, err)
@@ -332,47 +345,27 @@ func TestGetFTs(t *testing.T) {
 
 // 	req := map[string]interface{}{
 // 		"service_name": "Oms",
-// 		"data_name":    "get_infos",
+// 		"data_name":    "get_au_metrics",
 // 	}
 // 	buf, err := json.Marshal(req)
 // 	assert.Nil(t, err)
 
-// 	r, err := client.DoAction(string(buf))
+// 	r, err := client.DoGet(buf)
 // 	assert.Nil(t, err)
 
-// 	fmt.Println(string(r))
+// 	ret := make([]*gsf_proto.AuMetricsT, 0)
+// 	for r.Next() {
+// 		aumetrics := []*gsf_proto.AuMetricsT{}
+// 		record := r.Record()
+
+// 		jsonBuf, _ := record.MarshalJSON()
+// 		err := json.Unmarshal(jsonBuf, &aumetrics)
+// 		assert.Nil(t, err)
+// 		ret = append(ret, aumetrics...)
+// 	}
+
+// 	assert.Greater(t, len(ret), -1)
+// 	for _, item := range ret {
+// 		fmt.Printf("%+v\n", item)
+// 	}
 // }
-
-func TestGetAuMetrics(t *testing.T) {
-	endpoint := "192.168.1.188:30005"
-	client := NewFlightClient(endpoint)
-	err := client.Connect()
-	assert.Nil(t, err)
-	defer client.Disconnect()
-
-	req := map[string]interface{}{
-		"service_name": "Oms",
-		"data_name":    "get_au_metrics",
-	}
-	buf, err := json.Marshal(req)
-	assert.Nil(t, err)
-
-	r, err := client.DoGet(buf)
-	assert.Nil(t, err)
-
-	ret := make([]*gsf_proto.AuMetricsT, 0)
-	for r.Next() {
-		aumetrics := []*gsf_proto.AuMetricsT{}
-		record := r.Record()
-
-		jsonBuf, _ := record.MarshalJSON()
-		err := json.Unmarshal(jsonBuf, &aumetrics)
-		assert.Nil(t, err)
-		ret = append(ret, aumetrics...)
-	}
-
-	assert.Greater(t, len(ret), -1)
-	for _, item := range ret {
-		fmt.Printf("%+v\n", item)
-	}
-}
