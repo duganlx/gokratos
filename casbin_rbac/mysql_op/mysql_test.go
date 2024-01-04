@@ -23,7 +23,7 @@ func NewEnforcer() *casbin.Enforcer {
 		panic(err)
 	}
 
-	casbinModel, err := model.NewModelFromFile("../model.conf")
+	casbinModel, err := model.NewModelFromFile("./model.conf")
 	if err != nil {
 		panic(err)
 	}

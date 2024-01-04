@@ -9,7 +9,7 @@ import (
 
 func NewEnforcer() *casbin.Enforcer {
 
-	e, err := casbin.NewEnforcer("../model.conf", "../policy.csv")
+	e, err := casbin.NewEnforcer("./model.conf", "./policy.csv")
 	if err != nil {
 		panic(err)
 	}

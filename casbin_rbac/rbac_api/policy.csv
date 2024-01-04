@@ -1,0 +1,36 @@
+p, USER:lvx, DRW001:v1:test, *, allow
+p, USER:lvx, DRW002:v1:test, r, allow
+p, USER:lvx, DRW003:v1:test, w, allow
+p, USER:lvx, DRW004:v1:test, *, allow
+p, USER:lvx, DRW004:v1:test, w, deny
+p, USER:lvx, DRW005:v1:test, r, allow
+p, USER:lvx, DRW005:v1:test, w, allow
+
+g, USER:lvx, USERGROUP:it
+g, USER:lvx, SRCGROUP:drw
+g, USER:lvx, USERGROUP:eam
+g, USERGROUP:eam, SRCGROUP:eam
+
+p, USERGROUP:it, DRW011:v1:test, *, allow
+p, USERGROUP:it, DRW012:v1:test, r, allow
+p, USERGROUP:it, DRW013:v1:test, w, allow
+p, USERGROUP:it, DRW014:v1:test, *, allow
+p, USERGROUP:it, DRW014:v1:test, w, deny
+
+p, SRCGROUP:drw, DRW101:v1:test, *, allow
+p, SRCGROUP:drw, DRW102:v1:test, r, allow
+p, SRCGROUP:drw, DRW103:v1:test, w, allow
+p, SRCGROUP:drw, DRW104:v1:test, *, allow
+p, SRCGROUP:drw, DRW104:v1:test, w, deny
+
+p, SRCGROUP:eam, EAM101:v1:test, *, allow
+p, SRCGROUP:eam, EAM102:v1:test, r, allow
+p, SRCGROUP:eam, EAM103:v1:test, w, allow
+p, SRCGROUP:eam, EAM104:v1:test, *, allow
+p, SRCGROUP:eam, EAM104:v1:test, w, deny
+
+p, SRCGROUP:ev2, EAM101:v2:test, *, allow
+p, SRCGROUP:ev2, EAM102:v2:test, r, allow
+p, SRCGROUP:ev2, EAM103:v2:test, w, allow
+p, SRCGROUP:ev2, EAM104:v2:test, *, allow
+p, SRCGROUP:ev2, EAM104:v2:test, w, deny
